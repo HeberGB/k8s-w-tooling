@@ -1,8 +1,8 @@
-resource "kubernetes_namespace" "logging" {
+resource "kubernetes_namespace" "monitoring" {
   metadata {
     annotations = {
-      name = "kube-logging"
+      name = "kube-monitoring"
     }
-    name = "kube-logging"
+    name = "kube-monitoring"
   }
 }

@@ -1,0 +1,79 @@
+loki:
+  enabled: true
+  persistence:
+    enabled: true
+    accessModes:
+      - ReadWriteOnce
+    storageClassName: gp2
+    size: 32Gi
+
+promtail:
+  enabled: true
+
+grafana:
+  enabled: true
+  sidecar:
+    datasources:
+      enabled: true
+  image:
+    tag: 6.7.0
+  nodeSelector:
+    eks.amazonaws.com/nodegroup: tools
+  persistence:
+    enabled: true
+    storageClassName: gp2
+    size: 32Gi
+  service:
+    type: LoadBalancer
+    portName: https
+    port: 443
+    targetPort: 3000
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+      service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-west-2:027984065276:certificate/c7121c46-4267-4d57-a4da-4fb074963647
+      service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
+  grafana.ini:
+    paths:
+      data: /var/lib/grafana/data
+      logs: /var/log/grafana
+      plugins: /var/lib/grafana/plugins
+      provisioning: /etc/grafana/provisioning
+    analytics:
+      check_for_updates: true
+    log:
+      mode: console
+    grafana_net:
+      url: https://grafana.net
+    server:
+      root_url: https://grafana-${stage}.luuna.mx
+    auth.github:
+      enabled: true
+      allow_sign_up: true
+      scopes: user:email,read:org
+      auth_url: https://github.com/login/oauth/authorize
+      token_url: https://github.com/login/oauth/access_token
+      api_url: https://api.github.com/user
+      allowed_organizations: ${github_allowed_organizations}
+      client_id: ${github_client_id}
+      client_secret: ${github_client_secret}
+    smtp:
+      enabled: true
+      host: ${smtp_host}
+      user: ${smtp_user}
+      password: ${smtp_password}
+      skip_verify: true
+      from_address: ${smtp_user}
+      from_name: Grafana
+
+prometheus:
+  enabled: true
+  server:
+    nodeSelector:
+      eks.amazonaws.com/nodegroup: tools
+  pushgateway:
+    nodeSelector:
+      eks.amazonaws.com/nodegroup: tools
+  alertmanager:
+    enabled: true
+    nodeSelector:
+      eks.amazonaws.com/nodegroup: tools
