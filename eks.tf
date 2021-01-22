@@ -9,6 +9,33 @@ module "eks" {
   }
 
   vpc_id = module.vpc.vpc_id
+
+  node_groups = {
+    tools = {
+      name             = "tools"
+      desired_capacity = 3
+      max_capacity     = 5
+      min_capacity     = 2
+      instance_type    = "t3.medium"
+    }
+
+    backend = {
+      name             = "backend"
+      desired_capacity = 5
+      max_capacity     = 8
+      min_capacity     = 3
+      instance_type    = "t3.medium"
+    }
+
+    frontend = {
+      name             = "frontend"
+      desired_capacity = 2
+      max_capacity     = 4
+      min_capacity     = 1
+      instance_type    = "t3.medium"
+    }
+
+  }
 }
 
 data "aws_eks_cluster" "cluster" {
