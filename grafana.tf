@@ -5,5 +5,5 @@ resource "helm_release" "grafana" {
   chart      = "loki-stack"
   namespace  = "kube-monitoring"
 
-  values = [local.helm_chart_values]
+  values = [local.helm_chart_grafana_values]
 }

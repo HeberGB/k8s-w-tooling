@@ -30,7 +30,7 @@ grafana:
     targetPort: 3000
     annotations:
       service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
-      service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-west-2:027984065276:certificate/c7121c46-4267-4d57-a4da-4fb074963647
+      service.beta.kubernetes.io/aws-load-balancer-ssl-cert: ${aws_ssl_cert_arn}
       service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
   grafana.ini:
     paths:
