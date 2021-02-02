@@ -21,4 +21,13 @@ locals {
     "${path.module}/grafana_values.yaml",
     local.template_vars_grafana
   )
+
+  template_vars_ingress_controller = {
+    aws_ssl_cert_arn = var.aws_ssl_cert_arn
+  }
+
+  helm_chart_ingress_controller_values = templatefile(
+    "${path.module}/ingress-values.yaml",
+    local.template_vars_ingress_controller
+  )
 }
