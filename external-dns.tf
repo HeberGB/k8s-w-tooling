@@ -94,22 +94,14 @@ resource "kubernetes_deployment" "external_dns" {
       }
 
       spec {
+        node_selector = {
+          "eks.amazonaws.com/nodegroup" = "tools"
+        }
+
         container {
           name  = "external-dns"
           image = "k8s.gcr.io/external-dns/external-dns:v0.7.4"
           args  = ["--source=service", "--source=ingress", "--provider=aws", "--aws-zone-type=public", "--registry=txt", "--txt-owner-id=external-dns"]
-
-          resources {
-            limits {
-              cpu    = "250m"
-              memory = "500Mi"
-            }
-
-            requests {
-              cpu    = "250m"
-              memory = "500Mi"
-            }
-          }
         }
         service_account_name            = "external-dns"
         automount_service_account_token = true
