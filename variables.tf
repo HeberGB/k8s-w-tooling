@@ -12,18 +12,6 @@ variable "aws_ssl_cert_arn" {
   sensitive   = true
 }
 
-variable "github_client_id" {
-  description = "Github client id to oauth"
-}
-
-variable "github_client_secret" {
-  description = "Github client secret to oauth"
-}
-
-variable "github_allowed_organizations" {
-  description = "Github allowed organizations to oauth"
-}
-
 variable "smtp_host" {
   description = "SMTP host with port to send emails"
 }
