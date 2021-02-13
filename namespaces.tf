@@ -6,3 +6,12 @@ resource "kubernetes_namespace" "monitoring" {
     name = "kube-monitoring"
   }
 }
+
+resource "kubernetes_namespace" "admin" {
+  metadata {
+    annotations = {
+      name = "admin"
+    }
+    name = "admin"
+  }
+}
