@@ -29,6 +29,34 @@ module "eks" {
   }
 }
 
+resource "aws_iam_policy" "allow_ecr_on_node_groups" {
+  name        = "AllowEcrOnNodeGroups"
+  description = "Policy that allows pull images from ECR repositories"
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:BatchGetImage",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:GetAuthorizationToken"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "allow_ecr_on_node_groups" {
+  role       = module.eks.worker_iam_role_name
+  policy_arn = aws_iam_policy.allow_ecr_on_node_groups.arn
+}
+
 data "aws_eks_cluster" "cluster" {
   name = module.eks.cluster_id
 }
