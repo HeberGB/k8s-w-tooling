@@ -2,6 +2,7 @@ resource "kubernetes_config_map" "common" {
   for_each = toset([
     kubernetes_namespace.admin.metadata[0].name,
     kubernetes_namespace.ms_auth.metadata[0].name,
+    kubernetes_namespace.ms_clients.metadata[0].name,
   ])
 
   metadata {
@@ -29,6 +30,7 @@ resource "kubernetes_config_map" "notifications" {
 resource "kubernetes_config_map" "typeorm" {
   for_each = toset([
     kubernetes_namespace.ms_auth.metadata[0].name,
+    kubernetes_namespace.ms_clients.metadata[0].name,
   ])
 
   metadata {

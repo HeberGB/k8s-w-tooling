@@ -55,11 +55,26 @@ resource "kubernetes_secret" "postgresql" {
   }
 
   data = {
-    "root_password"        = var.postgresql_auth_root_password
-    "username"             = var.postgresql_auth_username
-    "database"             = var.postgresql_auth_database
-    "password"             = var.postgresql_auth_password
-    "replication_password" = var.postgresql_auth_replication_password
+    "username" = var.postgresql_auth_username
+    "database" = var.postgresql_auth_database
+    "password" = var.postgresql_auth_password
+  }
+}
+
+resource "kubernetes_secret" "postgresql_ms_clients" {
+  for_each = toset([
+    kubernetes_namespace.ms_clients.metadata[0].name,
+  ])
+
+  metadata {
+    name      = "postgresql"
+    namespace = each.value
+  }
+
+  data = {
+    "username" = var.postgresql_clients_username
+    "database" = var.postgresql_clients_database
+    "password" = var.postgresql_clients_password
   }
 }
 

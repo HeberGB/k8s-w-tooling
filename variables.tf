@@ -135,3 +135,18 @@ variable "redis_auth_port" {
 variable "redis_auth_password" {
   sensitive = true
 }
+
+variable "postgresql_clients_username" {
+  sensitive   = true
+  description = "Username for clients microservice database"
+}
+
+variable "postgresql_clients_database" {
+  sensitive   = true
+  description = "Database name for clients microservice database"
+}
+
+variable "postgresql_clients_password" {
+  sensitive   = true
+  description = "Password for clients microservice database"
+}

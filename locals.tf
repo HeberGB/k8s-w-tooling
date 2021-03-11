@@ -40,4 +40,15 @@ locals {
     "${path.module}/ms-auth-postgresql-values.yaml",
     local.template_vars_ms_auth_postgresql
   )
+
+  template_vars_ms_clients_postgresql = {
+    "username" = var.postgresql_clients_username
+    "database" = var.postgresql_clients_database
+    "password" = var.postgresql_clients_password
+  }
+
+  helm_chart_ms_clients_postgresql_values = templatefile(
+    "${path.module}/ms-clients-postgresql-values.yaml",
+    local.template_vars_ms_clients_postgresql
+  )
 }

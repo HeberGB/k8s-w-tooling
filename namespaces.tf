@@ -24,3 +24,12 @@ resource "kubernetes_namespace" "ms_auth" {
     name = "ms-auth"
   }
 }
+
+resource "kubernetes_namespace" "ms_clients" {
+  metadata {
+    annotations = {
+      name = "ms-clients"
+    }
+    name = "ms-clients"
+  }
+}
