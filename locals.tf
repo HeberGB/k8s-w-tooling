@@ -29,4 +29,15 @@ locals {
     "${path.module}/ingress-values.yaml",
     local.template_vars_ingress_controller
   )
+
+  template_vars_ms_auth_postgresql = {
+    "username" = var.postgresql_auth_username
+    "database" = var.postgresql_auth_database
+    "password" = var.postgresql_auth_password
+  }
+
+  helm_chart_ms_auth_postgresql_values = templatefile(
+    "${path.module}/ms-auth-postgresql-values.yaml",
+    local.template_vars_ms_auth_postgresql
+  )
 }

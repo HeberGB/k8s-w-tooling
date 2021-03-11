@@ -23,6 +23,7 @@ variable "smtp_user" {
 
 variable "smtp_password" {
   description = "SMTP password to send emails"
+  sensitive   = true
 }
 
 variable "app_api_port_server" {
@@ -48,4 +49,89 @@ variable "aws_access_key_id" {
 variable "aws_secret_access_key" {
   description = "https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html"
   sensitive   = true
+}
+
+variable "postgresql_auth_root_password" {
+  sensitive   = true
+  description = "Root password for auth microservice database"
+}
+
+variable "postgresql_auth_username" {
+  sensitive   = true
+  description = "Username for auth microservice database"
+}
+
+variable "postgresql_auth_database" {
+  sensitive   = true
+  description = "Database name for auth microservice database"
+}
+
+variable "postgresql_auth_password" {
+  sensitive   = true
+  description = "Password for auth microservice database"
+}
+
+variable "postgresql_auth_replication_password" {
+  sensitive   = true
+  description = "Password for auth microservice database of replication deployment"
+}
+
+variable "auth_jwt_secret" {
+  sensitive = true
+}
+
+variable "auth_app_token_sign" {
+  sensitive = true
+}
+
+variable "auth_app_token_ttl" {
+  sensitive = true
+}
+
+variable "auth_app_refresh_token_length" {
+  sensitive = true
+}
+
+variable "auth_app_refresh_token_ttl" {
+  sensitive = true
+}
+
+variable "auth_random_password_length" {
+  sensitive = true
+}
+
+variable "auth_random_pin_length" {
+  sensitive = true
+}
+
+variable "auth_login_retries" {
+  sensitive = true
+}
+
+variable "typeorm_connection" {
+  sensitive = true
+}
+
+variable "typeorm_entities" {
+  sensitive = true
+}
+
+variable "typeorm_migrations" {
+  sensitive = true
+}
+
+variable "typeorm_migrations_dir" {
+  sensitive = true
+}
+
+variable "redis_auth_host_password" {
+  sensitive = true
+}
+
+variable "redis_auth_port" {
+  sensitive = true
+}
+
+variable "redis_auth_password" {
+  sensitive = true
 }

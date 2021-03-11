@@ -13,18 +13,35 @@ module "eks" {
   node_groups = {
     tools = {
       name             = "tools"
-      desired_capacity = 2
-      max_capacity     = 4
+      desired_capacity = 1
+      max_capacity     = 2
       min_capacity     = 1
       instance_types   = ["t3.medium"]
+      k8s_labels = {
+        "purpose" = "tools"
+      }
     }
 
     admin = {
       name             = "admin"
-      desired_capacity = 2
-      max_capacity     = 4
+      desired_capacity = 1
+      max_capacity     = 2
       min_capacity     = 1
       instance_types   = ["t3.medium"]
+      k8s_labels = {
+        "purpose" = "admin"
+      }
+    }
+
+    databases = {
+      name             = "databases"
+      desired_capacity = 1
+      max_capacity     = 2
+      min_capacity     = 1
+      instance_types   = ["t3.medium"]
+      k8s_labels = {
+        "purpose" = "databases"
+      }
     }
   }
 }

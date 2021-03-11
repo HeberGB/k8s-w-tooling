@@ -1,0 +1,3 @@
+postgresqlDatabase: ${database}
+postgresqlUsername: ${username}
+postgresqlPassword: ${password}

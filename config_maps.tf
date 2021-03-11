@@ -1,7 +1,12 @@
 resource "kubernetes_config_map" "common" {
+  for_each = toset([
+    kubernetes_namespace.admin.metadata[0].name,
+    kubernetes_namespace.ms_auth.metadata[0].name,
+  ])
+
   metadata {
     name      = "common"
-    namespace = "admin"
+    namespace = each.value
   }
 
   data = {
@@ -18,5 +23,23 @@ resource "kubernetes_config_map" "notifications" {
 
   data = {
     email = var.notifications_email
+  }
+}
+
+resource "kubernetes_config_map" "typeorm" {
+  for_each = toset([
+    kubernetes_namespace.ms_auth.metadata[0].name,
+  ])
+
+  metadata {
+    name      = "typeorm"
+    namespace = each.value
+  }
+
+  data = {
+    "connection"     = var.typeorm_connection
+    "entities"       = var.typeorm_entities
+    "migrations"     = var.typeorm_migrations
+    "migrations_dir" = var.typeorm_migrations_dir
   }
 }

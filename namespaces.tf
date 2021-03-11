@@ -15,3 +15,12 @@ resource "kubernetes_namespace" "admin" {
     name = "admin"
   }
 }
+
+resource "kubernetes_namespace" "ms_auth" {
+  metadata {
+    annotations = {
+      name = "ms-auth"
+    }
+    name = "ms-auth"
+  }
+}
