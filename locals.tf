@@ -51,4 +51,6 @@ locals {
     "${path.module}/ms-clients-postgresql-values.yaml",
     local.template_vars_ms_clients_postgresql
   )
+
+  gateway_subdomain = terraform.workspace == "production" ? "gateway" : "gateway-${terraform.workspace}"
 }

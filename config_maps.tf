@@ -3,6 +3,7 @@ resource "kubernetes_config_map" "common" {
     kubernetes_namespace.admin.metadata[0].name,
     kubernetes_namespace.ms_auth.metadata[0].name,
     kubernetes_namespace.ms_clients.metadata[0].name,
+    kubernetes_namespace.gateway.metadata[0].name,
   ])
 
   metadata {

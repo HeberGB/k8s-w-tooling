@@ -25,6 +25,7 @@ resource "kubernetes_secret" "aws" {
 resource "kubernetes_secret" "auth" {
   for_each = toset([
     kubernetes_namespace.ms_auth.metadata[0].name,
+    kubernetes_namespace.gateway.metadata[0].name,
   ])
 
   metadata {

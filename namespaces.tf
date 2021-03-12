@@ -33,3 +33,12 @@ resource "kubernetes_namespace" "ms_clients" {
     name = "ms-clients"
   }
 }
+
+resource "kubernetes_namespace" "gateway" {
+  metadata {
+    annotations = {
+      name = "gateway"
+    }
+    name = "gateway"
+  }
+}
