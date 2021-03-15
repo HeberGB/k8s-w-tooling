@@ -326,6 +326,11 @@ resource "kubernetes_deployment" "ms_auth" {
             }
           }
 
+          env {
+            name  = "GRPC_URL_NOTIFICATIONS"
+            value = "${kubernetes_service.ms_notifications.metadata[0].name}.${kubernetes_service.ms_notifications.metadata[0].namespace}.svc.cluster.local:9090"
+          }
+
           liveness_probe {
             http_get {
               path = "/.well-known/apollo/server-health"

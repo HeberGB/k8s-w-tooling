@@ -218,7 +218,7 @@ resource "kubernetes_deployment" "ms_clients" {
 
           env {
             name  = "GRPC_URL_NOTIFICATIONS"
-            value = "${kubernetes_service.ms_notifications.metadata[0].name}.${kubernetes_service.ms_notifications.metadata[0].namespace}.cluster.local"
+            value = "${kubernetes_service.ms_notifications.metadata[0].name}.${kubernetes_service.ms_notifications.metadata[0].namespace}.svc.cluster.local:9090"
           }
 
           liveness_probe {
