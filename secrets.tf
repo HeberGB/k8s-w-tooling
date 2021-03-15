@@ -76,6 +76,8 @@ resource "kubernetes_secret" "postgresql_ms_clients" {
     "username" = var.postgresql_clients_username
     "database" = var.postgresql_clients_database
     "password" = var.postgresql_clients_password
+
+    "uri" = "postgresql+psycopg2://${var.postgresql_clients_username}:${var.postgresql_clients_password}@${helm_release.ms_clients_postgresql.name}.${helm_release.ms_clients_postgresql.namespace}.svc.cluster.local/${var.postgresql_clients_database}"
   }
 }
 
